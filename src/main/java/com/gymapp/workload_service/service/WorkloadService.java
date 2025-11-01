@@ -34,7 +34,7 @@ public class WorkloadService {
 
         if ("ADD".equalsIgnoreCase(req.getActionType())) {
             summary.updateHours(year, month, req.getDuration());
-        } else if ("DELETE".equalsIgnoreCase(req.getActionType())) {
+        } else if ("CANCEL".equalsIgnoreCase(req.getActionType())) {
             summary.updateHours(year, month, -req.getDuration());
         }
     }
