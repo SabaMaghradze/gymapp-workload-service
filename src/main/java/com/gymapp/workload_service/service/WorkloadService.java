@@ -1,5 +1,6 @@
 package com.gymapp.workload_service.service;
 
+import com.gymapp.workload_service.exception.InvalidActionException;
 import com.gymapp.workload_service.model.TrainerSummary;
 import com.gymapp.workload_service.model.WorkloadRequest;
 import org.slf4j.Logger;
@@ -36,6 +37,8 @@ public class WorkloadService {
             summary.updateHours(year, month, req.getDuration());
         } else if ("CANCEL".equalsIgnoreCase(req.getActionType())) {
             summary.updateHours(year, month, -req.getDuration());
+        } else {
+            throw new InvalidActionException("Invalid action type");
         }
     }
 
