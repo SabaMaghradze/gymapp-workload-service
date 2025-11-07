@@ -35,6 +35,6 @@ public class WorkloadRequest {
     private Integer duration;
 
     @NotBlank(message = "Action type is required")
-    @Pattern(regexp = "ADD|CANCEL")
+    @Pattern(regexp = "ADD|CANCEL", message = "Action type must be either ADD or CANCEL")
     private String actionType;
 }
