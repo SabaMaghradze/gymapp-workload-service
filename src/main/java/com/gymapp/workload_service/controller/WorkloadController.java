@@ -1,6 +1,6 @@
 package com.gymapp.workload_service.controller;
 
-import com.gymapp.workload_service.model.WorkloadRequest;
+import com.gymapp.common.WorkloadRequest;
 import com.gymapp.workload_service.service.WorkloadService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

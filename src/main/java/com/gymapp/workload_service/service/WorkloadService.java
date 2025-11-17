@@ -2,7 +2,7 @@ package com.gymapp.workload_service.service;
 
 import com.gymapp.workload_service.exception.InvalidActionException;
 import com.gymapp.workload_service.model.TrainerSummary;
-import com.gymapp.workload_service.model.WorkloadRequest;
+import com.gymapp.common.WorkloadRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

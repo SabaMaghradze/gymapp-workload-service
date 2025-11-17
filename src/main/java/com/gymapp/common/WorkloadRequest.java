@@ -1,4 +1,4 @@
-package com.gymapp.workload_service.model;
+package com.gymapp.common;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
