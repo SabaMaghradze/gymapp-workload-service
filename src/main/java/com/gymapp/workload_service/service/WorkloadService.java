@@ -18,34 +18,35 @@ public class WorkloadService {
 
     public void processWorkload(WorkloadRequest req) {
 
-        logger.info("Received workload request for trainer [{}] date [{}] duration [{}] action [{}]",
-                req.getTrainerUsername(), req.getTrainingDate(), req.getDuration(), req.getActionType());
-
-        TrainerSummary summary = db.computeIfAbsent( // returns the trainer if it exists (by username), otherwise builds it.
-                req.getTrainerUsername(),
-                key -> new TrainerSummary(req.getTrainerUsername(),
-                        req.getTrainerFirstName(),
-                        req.getTrainerLastName(),
-                        req.isActive())
-        );
-
-        LocalDate date = req.getTrainingDate();
-        int year = date.getYear();
-        int month = date.getMonthValue();
-
-        if ("ADD".equalsIgnoreCase(req.getActionType())) {
-            summary.updateHours(year, month, req.getDuration());
-        } else if ("CANCEL".equalsIgnoreCase(req.getActionType())) {
-            summary.updateHours(year, month, -req.getDuration());
-        } else {
-            throw new InvalidActionException("Invalid action type");
-        }
+//        logger.info("Received workload request for trainer [{}] date [{}] duration [{}] action [{}]",
+//                req.getTrainerUsername(), req.getTrainingDate(), req.getDuration(), req.getActionType());
+//
+//        TrainerSummary summary = db.computeIfAbsent( // returns the trainer if it exists (by username), otherwise builds it.
+//                req.getTrainerUsername(),
+//                key -> new TrainerSummary(req.getTrainerUsername(),
+//                        req.getTrainerFirstName(),
+//                        req.getTrainerLastName(),
+//                        req.isActive())
+//        );
+//
+//        LocalDate date = req.getTrainingDate();
+//        int year = date.getYear();
+//        int month = date.getMonthValue();
+//
+//        if ("ADD".equalsIgnoreCase(req.getActionType())) {
+//            summary.updateHours(year, month, req.getDuration());
+//        } else if ("CANCEL".equalsIgnoreCase(req.getActionType())) {
+//            summary.updateHours(year, month, -req.getDuration());
+//        } else {
+//            throw new InvalidActionException("Invalid action type");
+//        }
     }
 
     public Integer getHoursForMonth(String username, int year, int month) {
-        TrainerSummary summary = db.get(username);
-        if (summary == null) return null;
-        return summary.getMonthlyHours(year, month);
+//        TrainerSummary summary = db.get(username);
+//        if (summary == null) return null;
+//        return summary.getMonthlyHours(year, month);
+        return null;
     }
 }
 

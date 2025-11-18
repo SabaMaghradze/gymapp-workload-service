@@ -2,43 +2,34 @@ package com.gymapp.workload_service.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @AllArgsConstructor
 @Data
+@Document(collation = "trainer_summary")
+@CompoundIndex(name = "first_last_name_idx", def = "{'trainerFirstname': 1, 'trainerLastname': 1}")
 public class TrainerSummary {
 
+    @Id
     private String trainerUsername;
+
     private String trainerFirstName;
+
     private String trainerLastName;
+
     private boolean isActive;
+
+    Set<Map<Integer, Integer>> trainingsDuration = new HashSet<>();
 
     public TrainerSummary(String trainerUsername, String trainerFirstName, String trainerLastName, boolean isActive) {
         this.trainerUsername = trainerUsername;
         this.trainerFirstName = trainerFirstName;
         this.trainerLastName = trainerLastName;
         this.isActive = isActive;
-    }
-
-    private Map<Integer, Map<Integer, Integer>> yearlyData = new HashMap<>();
-
-    public void updateHours(int year, int month, Integer hours) {
-        yearlyData.putIfAbsent(year, new HashMap<>());
-        yearlyData.get(year) // gets the existing map of months for that year
-                .put(month, yearlyData.get(year).getOrDefault(month, 0) + hours);
-
-//        Map<Integer, Integer> monthMap = yearlyData.get(year);
-//        if (monthMap == null) {
-//            monthMap = new HashMap<>();
-//            yearlyData.put(year, monthMap);
-//        }
-//        int currentHours = monthMap.getOrDefault(month, 0);
-//        monthMap.put(month, currentHours + hours);
-    }
-
-    public int getMonthlyHours(int year, int month) {
-        return yearlyData.getOrDefault(year, new HashMap<>()).getOrDefault(month, 0);
     }
 }
