@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class WorkloadMessageConsumer {
@@ -17,8 +19,9 @@ public class WorkloadMessageConsumer {
     @JmsListener(destination = "workload.queue")
     public void receiveMessage(String jsonMessage) {
         try {
+            String transactionId = UUID.randomUUID().toString();
             WorkloadRequest workloadRequest = objectMapper.readValue(jsonMessage, WorkloadRequest.class);
-            workloadService.processWorkload(workloadRequest);
+            workloadService.processWorkload(workloadRequest, transactionId);
         } catch (Exception e) {
             throw new RuntimeException("Invalid message payload", e);
         }

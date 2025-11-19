@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/trainer/workload")
@@ -16,20 +18,21 @@ public class WorkloadController {
 
     @PostMapping
     public ResponseEntity<Void> updateWorkLoad(@Valid @RequestBody WorkloadRequest request) {
-        workloadService.processWorkload(request);
+        String transactionId = UUID.randomUUID().toString();
+        workloadService.processWorkload(request, transactionId);
         return ResponseEntity.ok().build();
     }
-
-    @GetMapping("/{username}/{year}/{month}")
-    public ResponseEntity<Integer> getWorkLoad(@PathVariable String username,
-                                               @PathVariable int year,
-                                               @PathVariable int month) {
-
-        Integer hours = workloadService.getHoursForMonth(username, year, month);
-        if (hours == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(hours);
-    }
+//
+//    @GetMapping("/{username}/{year}/{month}")
+//    public ResponseEntity<Integer> getWorkLoad(@PathVariable String username,
+//                                               @PathVariable int year,
+//                                               @PathVariable int month) {
+//
+//        Integer hours = workloadService.getHoursForMonth(username, year, month);
+//        if (hours == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        return ResponseEntity.ok(hours);
+//    }
 }

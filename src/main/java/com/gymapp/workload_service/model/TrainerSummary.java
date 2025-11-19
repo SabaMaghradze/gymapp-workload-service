@@ -13,7 +13,7 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collation = "trainer_summary")
+@Document(collection = "trainer_summary")
 @CompoundIndex(name = "first_last_name_idx", def = "{'trainerFirstname': 1, 'trainerLastname': 1}")
 public class TrainerSummary {
 
